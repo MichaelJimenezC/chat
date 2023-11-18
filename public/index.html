@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Local con WebSocket</title>
+  <link rel="stylesheet" type="text/css" href="assets/styles.css">
+</head>
+<body>
+  <div class="Contenedor-Chat">
+    <div id="contenedorChat" class="message-container"></div>
+    <div class="Caja-escribir">
+      <form name="form" id="forms">
+        <input id="chat" type="text" name="Escribe algo">
+        <button id="enviar" type="submit" name="enviar">
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+  
+
+
+  <script src="assets/scripts.js" type="text/javascript"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+let isSentMessage = false;
+
+socket.on('chat message', (msg) => {
+  console.log('message: ' + msg);
+  let currentDiv = document.getElementById("contenedorChat");
+  let newDiv = document.createElement("div");
+  let newContent = document.createTextNode(msg);
+  newDiv.classList.add("message-container");
+  if (isSentMessage) {
+    newDiv.classList.add("sent");
+    isSentMessage = false;
+  } else {
+    newDiv.classList.add("received");
+  }
+  let messageDiv = document.createElement("div");
+  messageDiv.classList.add("message");
+  messageDiv.appendChild(newContent);
+  newDiv.appendChild(messageDiv);
+  currentDiv.appendChild(newDiv);
+  currentDiv.scrollTop = currentDiv.scrollHeight;
+});
+
+document.getElementById("forms").addEventListener("submit", (event) => {
+  event.preventDefault();
+  let inputValue = document.getElementById("chat").value;
+  socket.emit('chat message', inputValue);
+  document.getElementById("chat").value = '';
+  isSentMessage = true;
+});
+
+  </script>
+</body>
+</html>

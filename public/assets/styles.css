@@ -1,0 +1,69 @@
+.Contenedor-Chat{
+	width: 600px;
+	height: 100vh; 
+	margin: auto;
+	border: 20px solid black;
+	padding: 20px;
+	text-align:center;
+	position:relative;
+	background-image: url('fondo.jpg');
+	background-size: cover;
+	background-position: center;
+  }
+  
+  #contenedorChat {
+	overflow-y: auto;
+	max-height: 80%;
+	margin-bottom: 10px;
+	width: 600px;
+	height: 800px;
+  }
+  
+  .Caja-escribir {
+	margin-top: 10px;
+  }
+  
+  input[type="text"] {
+	width: 70%;
+	padding: 10px;
+	font-size: 16px;
+  }
+  
+  button[type="submit"] {
+	width: 25%;
+	background-color: #008CBA;
+	color: white;
+	padding: 10px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+	background-color: #006080;
+  }
+  
+  .message-container {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .sent .message {
+	align-self: flex-end;
+	background-color: #DCF8C6;
+  }
+  
+  .received .message {
+	align-self: flex-start;
+	background-color: #FFFFFF;
+  }
+  
+  .message {
+	border: 2px solid black;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 5px;
+	font-size: 18px;
+	word-wrap: break-word;
+  }
+  
